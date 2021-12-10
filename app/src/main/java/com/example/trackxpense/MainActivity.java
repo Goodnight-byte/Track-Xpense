@@ -2,6 +2,7 @@ package com.example.trackxpense;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,10 +16,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
 
+        final ImageButton button = findViewById(R.id.addNewExpenses);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                Intent intent = new Intent(MainActivity.this.getContext(), NewExpenseActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    private Context getContext() {
+        return this;
     }
 
-    public void createExpense(View view) {
-        Intent intent = new Intent(this, NewExpenseActivity.class);
-        startActivity(intent);
-    }
 }
