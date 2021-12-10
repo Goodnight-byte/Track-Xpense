@@ -44,11 +44,12 @@
         android:id="@+id/expenseCreate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="ADD"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="EDIT"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expenseCategory" />
+        tools:layout_editor_absoluteY="250dp" />
 
     <Switch
         android:id="@+id/recurringSwitch"
@@ -61,5 +62,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.401" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:text="BACK"
+        app:layout_constraintBaseline_toBaselineOf="@+id/expenseCreate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/expenseCreate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
