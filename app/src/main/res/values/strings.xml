@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Track Xpense</string>
+    <string name="addExpenseButton">"Add New Expenses"</string>
 </resources>
