@@ -2,12 +2,16 @@ package com.example.trackxpense;
 
 import static java.lang.Float.parseFloat;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.gson.Gson;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,5 +43,11 @@ public class NewExpenseActivity extends AppCompatActivity {
         Date d = dateFormat.parse(expenseDate);
         String expenseCategory = category.getText().toString();
         Expense e = new Expense(parseFloat(expenseValue), d, recurring,expenseCategory);
+        String je = new Gson().toJson(e);
+
+        Intent intent = new Intent();
+        intent.putExtra("expense", je);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

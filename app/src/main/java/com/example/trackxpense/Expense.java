@@ -1,6 +1,7 @@
 package com.example.trackxpense;
 
 import java.util.Date;
+import java.util.List;
 
 public class Expense {
     Float value;
@@ -17,5 +18,13 @@ public class Expense {
 
     public Expense getExpense() {
         return this;
+    }
+
+    public void listAdd (List l) {
+        l.add(this);
+    }
+
+    public String toString() {
+        return this.value.toString() + " " + this.date.toString();
     }
 }
