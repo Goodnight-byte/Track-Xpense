@@ -37,11 +37,13 @@ public class NewExpenseActivity extends AppCompatActivity {
         EditText value = (EditText) findViewById(R.id.expenseFloat);
         EditText date = (EditText) findViewById(R.id.expenseDate);
         EditText category = (EditText) findViewById(R.id.expenseCategory);
+
         String expenseValue = value.getText().toString();
         String expenseDate = date.getText().toString();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date d = dateFormat.parse(expenseDate);
         String expenseCategory = category.getText().toString();
+
         Expense e = new Expense(parseFloat(expenseValue), d, recurring,expenseCategory);
         String je = new Gson().toJson(e);
 

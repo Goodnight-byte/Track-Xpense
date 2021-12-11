@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -21,17 +22,25 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private final List<Expense> expenseList = new ArrayList<>();
+
     ArrayAdapter<Expense> itemsAdapter;
+    Float total = Float.valueOf(0);
+    TextView totalCost;
 
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
+
         itemsAdapter =
                 new ArrayAdapter<Expense>(getContext(), android.R.layout.simple_list_item_1, expenseList);
         final ListView listview = (ListView) findViewById(R.id.listOfExpenses);
         listview.setAdapter(itemsAdapter);
+        totalCost = findViewById(R.id.totalExpenses);
+        this.updateTotal();
+
+
         final ImageButton button = findViewById(R.id.addNewExpenses);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -41,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     
+    }
+
+    private void updateTotal() {
+        for (Expense e: expenseList) {
+            total += e.value;
+
+        }
+        totalCost.setText(total.toString());
+
     }
 
     private Context getContext() {
@@ -53,12 +71,11 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == 100 && resultCode == RESULT_OK){
             String je = data.getStringExtra("expense");
             Expense e = new Gson().fromJson(je, Expense.class);
-
             e.listAdd(expenseList);
             itemsAdapter.notifyDataSetChanged();
-            Log.i("HELP", "received expense.");
-        }
+            this.updateTotal();
 
+        }
 
 
 }
