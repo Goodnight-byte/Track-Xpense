@@ -6,7 +6,7 @@ import java.util.List;
 public class Expense {
     Float value;
     Date date;
-    Boolean recurring;
+    boolean recurring;
     String category;
 
     public Expense(Float value, Date date, Boolean recurring, String category) {
@@ -18,10 +18,6 @@ public class Expense {
 
     public Expense getExpense() {
         return this;
-    }
-
-    public void listAdd (List l) {
-        l.add(this);
     }
 
     public String toString() {

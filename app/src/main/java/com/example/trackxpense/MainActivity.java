@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +17,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,17 +27,18 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final List<Expense> expenseList = new ArrayList<>();
+    List<Expense> expenseList = new ArrayList<>();
 
     ArrayAdapter<Expense> itemsAdapter;
     Float total = Float.valueOf(0);
     TextView totalCost;
 
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
+        loadData();
 
         itemsAdapter =
                 new ArrayAdapter<Expense>(getContext(), android.R.layout.simple_list_item_1, expenseList);
@@ -58,13 +62,35 @@ public class MainActivity extends AppCompatActivity {
                 Expense e = (Expense) itemsAdapter.getItem(position);
                 Intent intent = new Intent(getContext(), EditActivity.class);
                 String je = new Gson().toJson(e);
+                String json = new Gson().toJson(expenseList);
                 intent.putExtra("expense", je);
                 //based on item add info to intent
-                startActivityForResult(intent, 200);
+                startActivity(intent);
             }
 
         });
-    
+
+    }
+
+    private void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(expenseList);
+        editor.putString("expense list", json);
+        editor.apply();
+    }
+
+    private void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("expense list", null);
+        Type type = new TypeToken<ArrayList<Expense>>(){}.getType();
+        expenseList = gson.fromJson(json, type);
+
+        if (expenseList == null) {
+            expenseList = new ArrayList<>();
+        }
     }
 
     private void updateTotal() {
@@ -80,17 +106,20 @@ public class MainActivity extends AppCompatActivity {
         return this;
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 100 && resultCode == RESULT_OK){
             String je = data.getStringExtra("expense");
             Expense e = new Gson().fromJson(je, Expense.class);
-            e.listAdd(expenseList);
+            expenseList.add(e);
             itemsAdapter.notifyDataSetChanged();
             this.updateTotal();
+            saveData();
 
         }
+
 
 
 }
