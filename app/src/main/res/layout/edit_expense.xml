@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/expenseFloat"
+        android:id="@+id/editExpenseFloat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/expenseDate"
+        android:id="@+id/editExpenseDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -29,10 +29,10 @@
         android:text="Expense Date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expenseFloat" />
+        app:layout_constraintTop_toBottomOf="@+id/editExpenseFloat" />
 
     <EditText
-        android:id="@+id/expenseCategory"
+        android:id="@+id/editExpenseCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -42,22 +42,22 @@
         android:text="Category"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expenseDate" />
+        app:layout_constraintTop_toBottomOf="@+id/editExpenseDate" />
 
     <Button
-        android:id="@+id/expenseCreate"
+        android:id="@+id/expenseEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="EDIT"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/editCancel"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expenseCategory" />
+        app:layout_constraintTop_toBottomOf="@+id/editExpenseCategory" />
 
     <Switch
-        android:id="@+id/recurringSwitch"
+        android:id="@+id/editRecurringSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
@@ -70,14 +70,14 @@
         app:layout_constraintVertical_bias="0.401" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/editCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
         android:text="BACK"
-        app:layout_constraintBaseline_toBaselineOf="@+id/expenseCreate"
+        app:layout_constraintBaseline_toBaselineOf="@+id/expenseEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/expenseCreate" />
+        app:layout_constraintStart_toEndOf="@+id/expenseEdit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

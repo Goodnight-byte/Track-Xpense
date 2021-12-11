@@ -4,7 +4,6 @@ import static java.lang.Float.parseFloat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -27,16 +26,16 @@ public class NewExpenseActivity extends AppCompatActivity {
 
     public void newExpense(View view) throws ParseException {
 
-        Switch s = (Switch) findViewById(R.id.recurringSwitch);
+        Switch s = (Switch) findViewById(R.id.editRecurringSwitch);
         Boolean recurring;
         if (s != null) {
             recurring = true;
         } else {
             recurring = false;
         }
-        EditText value = (EditText) findViewById(R.id.expenseFloat);
-        EditText date = (EditText) findViewById(R.id.expenseDate);
-        EditText category = (EditText) findViewById(R.id.expenseCategory);
+        EditText value = (EditText) findViewById(R.id.editExpenseFloat);
+        EditText date = (EditText) findViewById(R.id.editExpenseDate);
+        EditText category = (EditText) findViewById(R.id.editExpenseCategory);
 
         String expenseValue = value.getText().toString();
         String expenseDate = date.getText().toString();

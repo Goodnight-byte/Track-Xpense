@@ -1,5 +1,7 @@
 package com.example.trackxpense;
 
+import static java.lang.Float.parseFloat;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -7,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -48,6 +51,18 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this.getContext(), NewExpenseActivity.class);
                 startActivityForResult(intent, 100);
             }
+        });
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Expense e = (Expense) itemsAdapter.getItem(position);
+                Intent intent = new Intent(getContext(), EditActivity.class);
+                String je = new Gson().toJson(e);
+                intent.putExtra("expense", je);
+                //based on item add info to intent
+                startActivityForResult(intent, 200);
+            }
+
         });
     
     }
