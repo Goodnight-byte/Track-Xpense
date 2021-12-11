@@ -19,16 +19,18 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class EditActivity extends AppCompatActivity {
 
-    List<Expense> expenseList = new ArrayList<>();
-    Expense e;
+    List<Expense> editExpenseList = new ArrayList<>();
+    Expense e = new Expense(Float.valueOf(0), Calendar.getInstance().getTime(), false, "Category");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class EditActivity extends AppCompatActivity {
         e = new Gson().fromJson(expense, Expense.class);
         String array = intent.getExtras().getString("array");
         Type type = new TypeToken<List<Expense>>(){}.getType();
-        expenseList = new Gson().fromJson(array, type);
+        editExpenseList = new Gson().fromJson(array, type);
 
         EditText value = findViewById(R.id.editExpenseFloat);
         EditText date = findViewById(R.id.editExpenseDate);
@@ -78,7 +80,7 @@ public class EditActivity extends AppCompatActivity {
                 e.category = expenseCategory;
                 e.recurring = recurring;
 
-                expenseList.add(e);
+                editExpenseList.add(e);
                 saveData();
 
             }
@@ -89,7 +91,7 @@ public class EditActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(expenseList);
+        String json = gson.toJson(editExpenseList);
         editor.putString("expenseList", json);
         editor.apply();
     }

@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             Expense e = new Gson().fromJson(je, Expense.class);
             expenseList.add(e);
             itemsAdapter.notifyDataSetChanged();
-            this.updateTotal();
+            updateTotal();
             saveData();
 
         }
