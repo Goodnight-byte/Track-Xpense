@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
     private void updateTotal() {
         for (Expense e: expenseList) {
             total += e.value;
-
         }
         totalCost.setText(total.toString());
 
@@ -115,9 +114,8 @@ public class MainActivity extends AppCompatActivity {
             Expense e = new Gson().fromJson(je, Expense.class);
             expenseList.add(e);
             itemsAdapter.notifyDataSetChanged();
-            updateTotal();
             saveData();
-
+            updateTotal();
         }
 
 
